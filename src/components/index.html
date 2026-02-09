@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Перепустки</title>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .a4-sheet {
+            width: 297mm;
+            height: 210mm;
+            position: relative;
+            page-break-after: always;
+            background: white;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #000;
+        }
+
+        .permit {
+            border: 1px solid #000;
+            padding: 5mm;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            page-break-inside: avoid;
+        }
+
+        .permit-header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 22px;
+            margin-bottom: 6mm;
+            text-transform: uppercase;
+            border-bottom: 2px solid #000;
+            padding-bottom: 6mm;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .permit-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 3mm;
+        }
+
+        .field-row {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .field-label {
+            font-weight: bold;
+            min-width: 25mm;
+            flex-shrink: 0;
+            font-size: 20px;
+        }
+
+        .field-value {
+            flex-grow: 1;
+            font-size: 18px;
+        }
+
+        .photo-container {
+            position: absolute;
+            bottom: 6mm;
+            right: 5mm;
+            width: 35mm;
+            height: 45mm;
+            border: 1px solid #000;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        .photo-placeholder {
+            text-align: center;
+        }
+
+        .photo-text {
+            font-size: 9px;
+            color: #999;
+        }
+
+        .issuer-info {
+            margin-top: 5mm;
+            padding-top: 3mm;
+            border-top: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            gap: 2mm;
+        }
+
+        .signature-line {
+            margin-top: 8mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .signature-block {
+            text-align: center;
+            width: 40%;
+        }
+
+        .signature-space {
+            height: 15mm;
+            border-bottom: 1px solid #000;
+            margin-bottom: 2mm;
+        }
+
+        .signature-text {
+            font-size: 10px;
+        }
+
+        .empty-permit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #999;
+            font-style: italic;
+            border: 1px dashed #ccc;
+            background: #fafafa;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid grey;
+            text-align: left;
+            border-collapse: separate;
+        }
+
+        th,
+        td {
+            padding: 8px 5px;
+        }
+
+        caption {
+            font-size: 20px;
+            color: blue;
+        }
+
+        .logo {
+            color: white;
+            background-color: red;
+            margin-right: 10px;
+            padding: 7px;
+            font-size: 25px;
+        }
+
+        .logo-l {
+            color: white;
+            background-color: gray;
+            font-size: 9px;
+            margin-top: 10px;
+            margin-right: 10px;
+            margin-left: 78px;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            .a4-sheet {
+                width: 297mm;
+                height: 210mm;
+                page-break-after: always;
+            }
+
+            .permit {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="a4-sheet">
+        <div class="grid-container">
+
+            <div class="empty-permit">Порожня перепустка</div>`;
+
+
+            <div class="permit">
+                <div class="permit-header">
+                    <div>
+                        <div><span class="logo">Pro</span><span class="logo">Tec</span></div>
+                        <div class="logo-l">logistic</div>
+                    </div> <span>Перепустка №1</span>
+                </div>
+
+                <div class="photo-container">
+                    <div class="photo-placeholder">
+                        <div style="margin-bottom: 2mm;">ФОТО</div>
+                        <div class="photo-text">3x4 см</div>
+                    </div>
+                </div>
+
+                <div class="permit-content">
+                    <table>
+                        <tr>
+                            <td class="field-label">ПІБ:</td>
+                            <td class="field-value">${plate.ownerName || 'Не вказано'}</td>
+                        </tr>
+                        <tr>
+                            <td class="field-label">Організація:</td>
+                            <td class="field-value">${plate.ownerName || 'Не вказано'}</td>
+                        </tr>
+                        <tr>
+                            <td class="field-label">Держ. номер:</td>
+                            <td class="field-value">${plate.licensePlate || 'Не вказано'}</td>
+                        </tr>
+                        <tr>
+                            <td class="field-label">Марка авто:</td>
+                            <td class="field-value">${plate.carModel || 'Не вказано'}</td>
+                        </tr>
+                        <tr>
+                            <td class="field-label">Видана:</td>
+                            <td class="field-value">Новак І.В.</td>
+                        </tr>
+                        <tr>
+                            <td class="field-label">Підпис пос.особи:</td>
+                            <td class="field-value"></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
